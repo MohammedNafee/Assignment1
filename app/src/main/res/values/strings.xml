@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Assignment1</string>
+    <string-array name="taskOptions">
+        <item>View task</item>
+        <item>Add new task</item>
+        <item>Change task status</item>
+    </string-array>
 </resources>
