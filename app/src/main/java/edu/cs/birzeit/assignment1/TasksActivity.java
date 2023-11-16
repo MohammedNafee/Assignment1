@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,15 +21,23 @@ public class TasksActivity extends AppCompatActivity {
         TaskController taskController = new TaskController(this);
         List<Task> tasks = taskController.getTasks();
 
-        String[] taskTitles = new String[tasks.size()];
-        for (int i = 0; i < tasks.size(); i++) {
-            taskTitles[i] = tasks.get(i).toString();
+        String[] taskTitles = new String[0];
+        if(tasks.isEmpty()){
+            TextView emptyMessage = findViewById(R.id.emptyMessageTextView);
+            emptyMessage.setVisibility(View.VISIBLE);
+        }else {
+            taskTitles = new String[tasks.size()];
+            for (int i = 0; i < tasks.size(); i++) {
+                taskTitles[i] = tasks.get(i).toString();
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 taskTitles);
         ListView listView = findViewById(R.id.taskListView);
         listView.setAdapter(adapter);
+
+
     }
 
 }

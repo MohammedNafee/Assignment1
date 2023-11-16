@@ -5,4 +5,8 @@
         <item>Add new task</item>
         <item>Change task status</item>
     </string-array>
+    <string-array name="status_options">
+        <item>due</item>
+        <item>done</item>
+    </string-array>
 </resources>

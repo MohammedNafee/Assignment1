@@ -7,11 +7,13 @@ public class Task {
     private String title;
     private String description;
     private Date dueDate;
+    private String status;
 
-    public Task(String title, String description, Date dueDate) {
+    public Task(String title, String description, Date dueDate, String status) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.status = status;
     }
 
     public String getTitle() {
@@ -36,6 +38,14 @@ public class Task {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @NonNull
