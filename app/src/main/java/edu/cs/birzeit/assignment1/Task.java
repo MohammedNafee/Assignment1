@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 
 public class Task {
+
+    private int id;
     private String title;
     private String description;
     private Date dueDate;
@@ -14,6 +16,14 @@ public class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskController {
-
+    private static int taskIdCounter = 1; // Initial ID counter
     //the name of the SharedPreferences file
     private static final String PrefsName = "TaskPrefs";
     //the key for storing Tasks
@@ -25,8 +25,13 @@ public class TaskController {
 
     public void addTask(Task task) {
         List<Task> tasks = getTasks();
+        task.setId(generateUniqueId());
         tasks.add(task);
         saveTasks(tasks);
+    }
+
+    private static int generateUniqueId() {
+        return taskIdCounter++;
     }
 
     private void saveTasks(List<Task> tasks) {
@@ -45,6 +50,19 @@ public class TaskController {
             return gson.fromJson(strGson, type);
         } else {
             return new ArrayList<>();
+        }
+    }
+
+    public void updateTaskStatus(int taskId, String newStatus) {
+        List<Task> tasks = getTasks();
+
+        for (Task task : tasks) {
+            if (task.getId() == taskId) {
+                // Update the task status
+                task.setStatus(newStatus);
+                saveTasks(tasks);
+                return;
+            }
         }
     }
 }

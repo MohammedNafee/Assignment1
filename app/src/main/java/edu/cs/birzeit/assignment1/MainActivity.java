@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
                      // Open AddTaskActivity when the button is clicked
                      Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
                      startActivity(intent);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, TasksActivity.class);
+                    startActivity(intent);
                 }
             }
         };
