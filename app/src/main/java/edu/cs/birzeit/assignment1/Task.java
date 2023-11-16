@@ -1,7 +1,6 @@
-package data;
+package edu.cs.birzeit.assignment1;
 
 import androidx.annotation.NonNull;
-
 import java.util.Date;
 
 public class Task {

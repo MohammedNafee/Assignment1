@@ -22,13 +22,12 @@ public class MainActivity extends AppCompatActivity {
                                     int position,
                                     long id) {
                 if(position == 0){
-                    Intent intent = new Intent(MainActivity.this, .class);
+                    Intent intent = new Intent(MainActivity.this, TasksActivity.class);
                     startActivity(intent);
                 }
             }
         };
         ListView listView = (ListView)findViewById(R.id.task_menu);
         listView.setOnItemClickListener(itemClickListener);
-    }
     }
 }
