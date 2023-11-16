@@ -37,6 +37,20 @@ public class TasksActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.taskListView);
         listView.setAdapter(adapter);
 
+        // Set an item click listener for the ListView
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected task
+                Task selectedTask = tasks.get(position);
+
+                // Open TaskDetails Activity with the task ID
+                Intent intent = new Intent(TasksActivity.this, TaskDetails.class);
+                intent.putExtra(TaskDetails.EXTRA_TASK_ID, selectedTask.getId());
+                startActivity(intent);
+            }
+        });
+
 
     }
 
