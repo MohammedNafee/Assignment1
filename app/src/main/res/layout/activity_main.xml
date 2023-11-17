@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/logo"/>
     <ListView
         android:id="@+id/task_menu"
         android:layout_width="match_parent"

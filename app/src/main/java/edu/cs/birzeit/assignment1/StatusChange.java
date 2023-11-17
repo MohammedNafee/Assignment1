@@ -70,7 +70,14 @@ public class StatusChange extends AppCompatActivity {
     }
 
     public void onChangeStatusClick(View view) {
-        updateTaskStatus(selectedTask.getId(), "New Status");
+        // Check the current status
+        String currentStatus = selectedTask.getStatus();
+
+        // Toggle the status
+        String newStatus = "due".equals(currentStatus) ? "done" : "due";
+
+        updateTaskStatus(selectedTask.getId(), newStatus);
+
         refreshTaskDetails();
     }
 
