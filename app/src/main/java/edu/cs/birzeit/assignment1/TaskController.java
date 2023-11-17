@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskController {
-    private static int taskIdCounter = 1; // Initial ID counter
-    //the name of the SharedPreferences file
+    private List<Task> tasks;
     private static final String PrefsName = "TaskPrefs";
-    //the key for storing Tasks
     private static final String TasksKey = "tasks";
     private SharedPreferences prefs;
     SharedPreferences.Editor editor;
@@ -21,17 +19,13 @@ public class TaskController {
     public TaskController(Context context) {
         prefs = context.getSharedPreferences(PrefsName, Context.MODE_PRIVATE);
         gson = new Gson();
+        tasks = getTasks(); // Load tasks from SharedPreferences during initialization
     }
 
     public void addTask(Task task) {
-        List<Task> tasks = getTasks();
-        task.setId(generateUniqueId());
-        tasks.add(task);
-        saveTasks(tasks);
-    }
-
-    private static int generateUniqueId() {
-        return taskIdCounter++;
+        List<Task> currentTasks = getTasks();
+        currentTasks.add(task);
+        saveTasks(currentTasks);
     }
 
     private void saveTasks(List<Task> tasks) {
@@ -53,7 +47,7 @@ public class TaskController {
     }
 
     public void updateTaskStatus(int taskId, String newStatus) {
-        List<Task> tasks = getTasks();
+        List<Task> tasks = new ArrayList<>(getTasks()); // Create a copy of the list
 
         for (Task task : tasks) {
             if (task.getId() == taskId) {
@@ -63,5 +57,14 @@ public class TaskController {
                 return;
             }
         }
+    }
+
+    public Task getTaskById(int taskId) {
+        for (Task task : tasks) {
+            if (task.getId() == taskId) {
+                return task;
+            }
+        }
+        return null;
     }
 }

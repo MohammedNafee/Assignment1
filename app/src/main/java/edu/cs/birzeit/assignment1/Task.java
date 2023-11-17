@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 
 public class Task {
-
+    private static int taskIdCounter = 0; // Initial ID counter
     private int id;
     private String title;
     private String description;
@@ -12,10 +12,15 @@ public class Task {
     private String status;
 
     public Task(String title, String description, Date dueDate, String status) {
+        this.id = generateUniqueId();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.status = status;
+    }
+
+    private static int generateUniqueId() {
+        return taskIdCounter++;
     }
 
     public int getId() {

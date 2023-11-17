@@ -14,6 +14,7 @@ public class TasksActivity extends AppCompatActivity {
     private ListView listView;
     private TaskController taskController;
     private List<Task> tasks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +25,10 @@ public class TasksActivity extends AppCompatActivity {
         tasks = taskController.getTasks();
 
         String[] taskTitles = new String[0];
-        if(tasks.isEmpty()){
+        if (tasks.isEmpty()) {
             TextView emptyMessage = findViewById(R.id.emptyMessageTextView);
             emptyMessage.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             taskTitles = new String[tasks.size()];
             for (int i = 0; i < tasks.size(); i++) {
                 taskTitles[i] = tasks.get(i).toString();
@@ -44,22 +45,21 @@ public class TasksActivity extends AppCompatActivity {
                 // Get the selected task
                 Task selectedTask = tasks.get(position);
 
-                // Open TaskDetails Activity with the task ID
-                Intent intent = new Intent(TasksActivity.this, TaskDetails.class);
-                intent.putExtra(TaskDetails.EXTRA_TASK_ID, selectedTask.getId());
-                startActivity(intent);
+                if (getIntent().getBooleanExtra("open_status_change", false)) {
+                    // Open StatusChange Activity
+                    Intent statusChangeIntent = new Intent(TasksActivity.this, StatusChange.class);
+                    statusChangeIntent.putExtra(TaskDetails.EXTRA_TASK_ID, selectedTask.getId());
+                    startActivity(statusChangeIntent);
+
+                    // Clear the extra to prevent reopening on rotation or other lifecycle events
+                    getIntent().removeExtra("open_status_change");
+                } else {
+                    // Open TaskDetails Activity with the task ID
+                    Intent intent = new Intent(TasksActivity.this, TaskDetails.class);
+                    intent.putExtra(TaskDetails.EXTRA_TASK_ID, selectedTask.getId());
+                    startActivity(intent);
+                }
             }
         });
-
-        if (getIntent().getBooleanExtra("open_status_change", false)) {
-            // Open StatusChange Activity
-            Intent statusChangeIntent = new Intent(TasksActivity.this, StatusChange.class);
-            startActivity(statusChangeIntent);
-
-            // Clear the extra to prevent reopening on rotation or other lifecycle events
-            getIntent().removeExtra("open_status_change");
-        }
-
-
     }
 }

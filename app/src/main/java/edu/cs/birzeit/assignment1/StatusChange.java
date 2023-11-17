@@ -32,14 +32,13 @@ public class StatusChange extends AppCompatActivity {
         txtDueDate = findViewById(R.id.txtDueDate);
         btnChangeStatus = findViewById(R.id.btnChangeStatus);
 
-        // Initialize TaskController
-        taskController = new TaskController(this);
-
         // Retrieve the task ID from the intent
         int taskId = getIntent().getIntExtra(TaskDetails.EXTRA_TASK_ID, -1);
 
         if (taskId != -1) {
-            selectedTask = taskController.getTasks().get(taskId);
+            // Initialize TaskController
+            taskController = new TaskController(this);
+            selectedTask = taskController.getTaskById(taskId);
 
             if (selectedTask != null) {
                 updateUI();
@@ -80,8 +79,7 @@ public class StatusChange extends AppCompatActivity {
     }
 
     private void refreshTaskDetails() {
-        // Refresh the UI with the updated task details
-        selectedTask = taskController.getTasks().get(selectedTask.getId());
+        selectedTask = taskController.getTaskById(selectedTask.getId());
         updateUI();
     }
 
