@@ -9,7 +9,6 @@
 
     <ListView
         android:id="@+id/task_menu"
-        style="@style/listViewStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:entries="@array/taskOptions" />

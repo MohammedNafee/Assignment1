@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Task Title: "
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_margin="15sp"/>
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="8dp"/>
 
     <TextView
         android:id="@+id/txtDesc"
@@ -22,8 +23,8 @@
         android:layout_height="wrap_content"
         android:text="Task Description: "
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="15sp"/>
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="8dp"/>
 
     <TextView
         android:id="@+id/txtDueDate"
@@ -31,8 +32,8 @@
         android:layout_height="wrap_content"
         android:text="Task Due date: "
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="15sp"/>
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="8dp"/>
 
     <TextView
         android:id="@+id/txtStatus"
@@ -40,8 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Task Status: "
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="15sp"/>
+        android:paddingLeft="8dp"/>
 
 
 </LinearLayout>

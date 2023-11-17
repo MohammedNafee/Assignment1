@@ -41,7 +41,6 @@ public class TaskController {
         editor.commit();
     }
 
-    //returns the list of tasks from SharedPreferences.
     public List<Task> getTasks() {
         String strGson = prefs.getString(TasksKey, null);
 

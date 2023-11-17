@@ -9,9 +9,11 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TaskDetails extends AppCompatActivity {
     public static final String EXTRA_TASK_ID = "task_id";
+    private Task task;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,21 +24,25 @@ public class TaskDetails extends AppCompatActivity {
 
         // Retrieve the task details from your TaskManager or data source
         TaskController taskController = new TaskController(this);
-        Task task = taskController.getTasks().get(taskId);
+        task = taskController.getTasks().get(taskId);
 
-        // Display task details in UI elements
+        updateUI();
 
+
+    }
+
+    private void updateUI(){
         TextView titleTextView = findViewById(R.id.txtTitle);
-        titleTextView.setText(task.getTitle());
+        titleTextView.setText("Title: "+task.getTitle());
 
         TextView DescTextView = findViewById(R.id.txtDesc);
-        DescTextView.setText(task.getDescription());
+        DescTextView.setText("Description: "+task.getDescription());
 
         TextView DueDateTextView = findViewById(R.id.txtDueDate);
-        SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
-        DueDateTextView.setText(date.format(task.getDueDate()));
+        SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd", Locale.US);
+        DueDateTextView.setText("Due Date: "+date.format(task.getDueDate()));
 
         TextView StatusTextView = findViewById(R.id.txtStatus);
-        StatusTextView.setText(task.getStatus());
+        StatusTextView.setText("Status: "+task.getStatus());
     }
 }

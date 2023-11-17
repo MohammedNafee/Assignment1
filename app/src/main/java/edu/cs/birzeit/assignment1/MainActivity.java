@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
                 if(position == 0){
                     Intent intent = new Intent(MainActivity.this, TasksActivity.class);
                     startActivity(intent);
-                } else if (position == 1) {
-                     // Open AddTaskActivity when the button is clicked
+                } else if (position == 1){
                      Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
                      startActivity(intent);
                 }else{
                     Intent intent = new Intent(MainActivity.this, TasksActivity.class);
+                    intent.putExtra("open_status_change", true);
                     startActivity(intent);
                 }
             }

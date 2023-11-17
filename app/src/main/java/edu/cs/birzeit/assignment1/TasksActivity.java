@@ -8,18 +8,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class TasksActivity extends AppCompatActivity {
-
+    private ListView listView;
+    private TaskController taskController;
+    private List<Task> tasks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
-        TaskController taskController = new TaskController(this);
-        List<Task> tasks = taskController.getTasks();
+        listView = findViewById(R.id.taskListView);
+        taskController = new TaskController(this);
+        tasks = taskController.getTasks();
 
         String[] taskTitles = new String[0];
         if(tasks.isEmpty()){
@@ -34,10 +36,8 @@ public class TasksActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 taskTitles);
-        ListView listView = findViewById(R.id.taskListView);
         listView.setAdapter(adapter);
 
-        // Set an item click listener for the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,7 +51,15 @@ public class TasksActivity extends AppCompatActivity {
             }
         });
 
+        if (getIntent().getBooleanExtra("open_status_change", false)) {
+            // Open StatusChange Activity
+            Intent statusChangeIntent = new Intent(TasksActivity.this, StatusChange.class);
+            startActivity(statusChangeIntent);
+
+            // Clear the extra to prevent reopening on rotation or other lifecycle events
+            getIntent().removeExtra("open_status_change");
+        }
+
 
     }
-
 }
