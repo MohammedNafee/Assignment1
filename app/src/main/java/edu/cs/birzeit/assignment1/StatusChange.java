@@ -1,18 +1,12 @@
 package edu.cs.birzeit.assignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 
 public class StatusChange extends AppCompatActivity {
@@ -32,11 +26,9 @@ public class StatusChange extends AppCompatActivity {
         txtDueDate = findViewById(R.id.txtDueDate);
         btnChangeStatus = findViewById(R.id.btnChangeStatus);
 
-        // Retrieve the task ID from the intent
         int taskId = getIntent().getIntExtra(TaskDetails.EXTRA_TASK_ID, -1);
 
         if (taskId != -1) {
-            // Initialize TaskController
             taskController = new TaskController(this);
             selectedTask = taskController.getTaskById(taskId);
 

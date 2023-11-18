@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskController {
+    private static int taskIdCounter = 0; // Initial ID counter
+
     private List<Task> tasks;
     private static final String PrefsName = "TaskPrefs";
     private static final String TasksKey = "tasks";
@@ -22,8 +24,12 @@ public class TaskController {
         tasks = getTasks(); // Load tasks from SharedPreferences during initialization
     }
 
+    private int generateUniqueId() {
+        return taskIdCounter++;
+    }
     public void addTask(Task task) {
         List<Task> currentTasks = getTasks();
+        task.setId(generateUniqueId());
         currentTasks.add(task);
         saveTasks(currentTasks);
     }
@@ -67,4 +73,11 @@ public class TaskController {
         }
         return null;
     }
+
+    public void clearTasks() {
+        editor = prefs.edit();
+        editor.remove(TasksKey);
+        editor.apply();
+    }
+
 }
